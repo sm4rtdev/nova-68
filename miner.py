@@ -187,14 +187,7 @@ def calculate_final_scores(score_dict: dict,
         score = avg_target - (config["antitarget_weight"] * avg_antitarget)
         final_scores.append(score)
 
-    # Store final scores in dataframe
-    batch_scores = pd.DataFrame({
-        "name": names,
-        "smiles": smiles,
-        "InChIKey": inchikey_list,
-        "score": final_scores
-    })
-
+    
     # if save_all_scores:
     #     all_scores = {"scored_molecules": [(mol["name"], mol["score"]) for mol in batch_scores.to_dict(orient="records")]}
     #     all_scores_path = os.path.join(OUTPUT_DIR, f"all_scores_{current_epoch}.json")
@@ -205,6 +198,14 @@ def calculate_final_scores(score_dict: dict,
     #     with open(all_scores_path, "w") as f:
     #         json.dump(all_scores, f, ensure_ascii=False, indent=2)
 
+    # Store final scores in dataframe
+    batch_scores = pd.DataFrame({
+        "name": names,
+        "smiles": smiles,
+        "InChIKey": inchikey_list,
+        "score": final_scores
+    })
+
     return batch_scores
 
 def main(config: dict):
@@ -214,7 +215,6 @@ def main(config: dict):
         config=config,
         save_all_scores=True,
     )
- 
 
 if __name__ == "__main__":
     config = get_config()
