@@ -157,7 +157,6 @@ def calculate_final_scores(score_dict: dict,
     """
     Calculate final scores per molecule
     """
-
     names = sampler_data["molecules"]
     smiles = [get_smiles_from_reaction(name) for name in names]
 
@@ -170,8 +169,7 @@ def calculate_final_scores(score_dict: dict,
         except Exception as e:
             bt.logging.error(f"Error calculating InChIKey for {s}: {e}")
             inchikey_list.append(None)
-
-    # Calculate final scores for each molecule
+            
     targets = score_dict[0]['target_scores']
     antitargets = score_dict[0]['antitarget_scores']
     final_scores = []
@@ -216,8 +214,6 @@ def main(config: dict):
         config=config,
         save_all_scores=True,
     )
- 
-
 if __name__ == "__main__":
     config = get_config()
     main(config)
